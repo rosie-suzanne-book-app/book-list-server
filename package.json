@@ -1,0 +1,32 @@
+{
+  "name": "book-list-server",
+  "version": "1.0.0",
+  "description": "Book app project for Code 301 week 3",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rosie-suzanne-book-app/book-list-server.git"
+  },
+  "keywords": [
+    "rosie",
+    "suzanne",
+    "books",
+    "express",
+    "party"
+  ],
+  "author": "Rosie Olaivar and Suzanne Leber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rosie-suzanne-book-app/book-list-server/issues"
+  },
+  "homepage": "https://github.com/rosie-suzanne-book-app/book-list-server#readme",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "pg": "^7.4.3"
+  }
+}
