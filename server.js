@@ -9,15 +9,28 @@ const pg = require('pg');
 const app = express();
 const PORT = process.env.PORT;
 
+
 // Database Setup
+
+// conStrings: We will do this differently later
+
+// Rosie conString for MAC - 'postgres://localhost:5432/books_app';
+
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.log(err));
 
 // Application Middleware
 app.use(cors());
 
 // API Endpoints
-app.get('/api/v1/test', (req, res) => {
-    console.log('OMG I have been visited by a client!!!!1!1?')
-    res.send('OMG I am in contact with the server!!11!!')
+app.get('/api/v1/books', (req, res) => {
+    console.log('OMG I amd handling a GET request by a client!!!!1!1?')
+
+    let SQL = `SELECT * FROM books;`; 
+    client.query(SQL)
+    .then(results => res.send(results.rows))
+    .catch(console.error);
 });
 
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
