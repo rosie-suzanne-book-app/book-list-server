@@ -14,7 +14,7 @@ const PORT = process.env.PORT;
 
 // conStrings: We will do this differently later
 
-// Rosie conString for MAC - 'postgres://localhost:5432/books_app';
+// Rosie conString for MAC - 'postgres://localhost:5432/books_app'; Old link
 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
@@ -36,3 +36,4 @@ app.get('/api/v1/books', (req, res) => {
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 
 app.listen(PORT, () => console.log(`The server is alive and well and listening on port ${PORT}`));
+
