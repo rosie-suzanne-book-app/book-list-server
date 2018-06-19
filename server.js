@@ -25,10 +25,10 @@ app.use(cors());
 
 // API Endpoints
 app.get('/api/v1/books', (req, res) => {
-    console.log('OMG I amd handling a GET request by a client!!!!1!1?')
+  console.log('OMG I amd handling a GET request by a client!!!!1!1?')
 
-    let SQL = `SELECT * FROM books;`; 
-    client.query(SQL)
+  let SQL = `SELECT * FROM books;`;
+  client.query(SQL)
     .then(results => res.send(results.rows))
     .catch(console.error);
 });
