@@ -47,9 +47,10 @@ app.get('/api/v1/books', (req, res) => {
 
 //get all books
 app.get(`api/v1/books`, (req, res) => {
-    let SQL = `SELECT * FROM books;`;
+  let SQL = `SELECT * FROM books;`;
+  client.query(SQL)
     .then(results => res.send(results.rows))
-    .catch(consolelog)
+    .catch(console.log)
 })
 
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
