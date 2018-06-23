@@ -51,7 +51,7 @@ app.get(`api/v1/books`, (req, res) => {
 })
 
 //create a book
-app.post(`api/v1/add`, (req, res) => {
+app.post(`api/v1/books`, (req, res) => {
     let {author, title, isbn, image_url, description} = req.body;
     let SQL = `INSERT INTO books (author, title, isbn, image_url, description) VALUES ($1, $2, $3, $4, $5);`;
     let values = [author, title, isbn, image_url, description];
@@ -61,14 +61,24 @@ app.post(`api/v1/add`, (req, res) => {
 })
 
 // update a book
-app.put(`api/v1/update`, (req, res) => {
-    let SQL = `SELECT * FROM books;`
-    client.query(SQL)
+app.put(`api/v1/books:id`, (req, res) => {
+    let {author, title, isbn, image_url, description} = req.body;
+    let SQL = `UPDATE books SET (author, title, isbn, image_url, description) VALUES ($1, $2, $3, $4, $5) WHERE book_id=$6;`;
+    let values = [author, title, isbn, image_url, description, req.params.id];
+    client.query(SQL, values)
     .then(results => res.send(results.rows))
     .catch(console.error)
 })
 
-
+//delete a book
+app.delete(`api/v1/books:id`, (req, res) => {
+    let {author, title, isbn, image_url, description} = req.body;
+    let SQL = `DELETE FROM books (author, title, isbn, image_url, description) VALUES ($1, $2, $3, $4, $5) WHERE book_id=$6;`;
+    let values = [author, title, isbn, image_url, description, req.params.id];
+    client.query(SQL, values)
+    .then(results => res.send(results.rows))
+    .catch(console.error)
+})
 
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 
