@@ -47,7 +47,7 @@ app.get('/api/v1/books', (req, res) => {
 
 //get all books
 app.get(`api/v1/books`, (req, res) => {
-    let SQL = `SELECT * FROM books;`;
+    let SQL = `SELECT * FROM books;`
     .then(results => res.send(results.rows))
     .catch(consolelog)
 })
