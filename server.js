@@ -32,8 +32,8 @@ client.on('error', err => console.log(err));
 // Application Middleware
 app.use(cors());
 
-// API Endpoints
-app.get('/api/v1/books', (req, res) => {
+// API Endpoints //get all books
+app.get(`/api/v1/books`, (req, res) => {
   console.log('OMG I am handling a GET request by a client!')
 
   let SQL = `SELECT * FROM books;`;
@@ -43,14 +43,32 @@ app.get('/api/v1/books', (req, res) => {
 });
 
 //get one book
-
-
-//get all books
 app.get(`api/v1/books`, (req, res) => {
     let SQL = `SELECT * FROM books;`
+    client.query(SQL)
     .then(results => res.send(results.rows))
-    .catch(consolelog)
+    .catch(console.error)
 })
+
+//create a book
+app.post(`api/v1/add`, (req, res) => {
+    let {author, title, isbn, image_url, description} = req.body;
+    let SQL = `INSERT INTO books (author, title, isbn, image_url, description) VALUES ($1, $2, $3, $4, $5);`;
+    let values = [author, title, isbn, image_url, description];
+    client.query(SQL, values)
+    .then(results => res.send(results.rows))
+    .catch(console.error)
+})
+
+// update a book
+app.put(`api/v1/update`, (req, res) => {
+    let SQL = `SELECT * FROM books;`
+    client.query(SQL)
+    .then(results => res.send(results.rows))
+    .catch(console.error)
+})
+
+
 
 app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 
